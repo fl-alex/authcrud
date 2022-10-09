@@ -1,16 +1,13 @@
 <?php
+  
+  include_once '../../header.php';
+  include_once '../../Controllers/Articles.php';
+  include_once '../../Controllers/Category.php';
 
-   if (!isset($_GET['editId']) && !empty($_GET['editId'])) {
-    $editId = $_GET['editId'];
-    $article = $ob_article->displyaRecordById($editId);
-  }
-    include_once '../../header.php';
-    include_once '../../Controllers/Articles.php';
-    include_once '../../Controllers/Category.php';
+  $ob_article = new Articles();
+  $ob_category = new Category();
+  $arr = $ob_category->get_data_for_select();
 
-    $ob_article = new Articles();
-    $ob_category = new Category();
-    $arr = $ob_category->get_data_for_select();
  
   if(isset($_GET['editId']) && !empty($_GET['editId'])) {
     $editId = $_GET['editId'];
@@ -25,6 +22,8 @@
       echo 'Error';
       exit();
   }
+
+
 
  
     

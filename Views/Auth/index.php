@@ -5,6 +5,7 @@
       header('Location: login.php');
   }
 
+  
   include_once "../../Controllers/Auth.php";
   $ob_auth = new Auth();
 
@@ -58,6 +59,7 @@
         <th>Id</th>
         <th>Name</th>
         <th>Email</th>
+        <th>Password</th>
         <th>Status</th>
         <th>Action</th>
         
@@ -75,11 +77,12 @@
           <td><?php echo $user['id'] ?></td>
           <td><?php echo $user['name'] ?></td>
           <td><?php echo $user['email'] ?></td>
+          <td><?php echo $user['password'] ?></td>
           <td><?php echo $user['is_active'] ?></td>
           <td>
-            <button class="btn btn-primary mr-2"><a href="edit.php?editId=<?php echo $article['id'] ?>">
+            <button class="btn btn-primary mr-2"><a href="edit.php?editId=<?php echo $user['id'] ?>">
               <i class="fa fa-pencil text-white" aria-hidden="true"></i></a></button>
-            <button class="btn btn-danger"><a href="index.php?deleteId=<?php echo $article['id'] ?>" onclick="confirm('Are you sure want to delete this record')">
+            <button class="btn btn-danger"><a href="index.php?deleteId=<?php echo $user['id'] ?>" onclick="confirm('Are you sure want to delete this record')">
               <i class="fa fa-trash text-white" aria-hidden="true"></i>
             </a></button>
           </td>

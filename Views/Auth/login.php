@@ -1,10 +1,8 @@
 <?php
 
+
   include_once "../../Controllers/Auth.php";
   $ob_auth = new Auth();
-
-  //print_r($ob_auth->checkUser());
-  //exit();
 
   if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
       $deleteId = $_GET['deleteId'];

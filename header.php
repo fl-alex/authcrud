@@ -14,6 +14,7 @@ $user = $auth->get_user();
 
 <html>
 <head>
+  
   <title>Control Panel</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,11 +23,9 @@ $user = $auth->get_user();
 </head>
 <body>
 <?php   
-
-
-  echo '<span>'.$user['name']." | <a href='../../logout.php'>LOGOUT</a></span>";
+echo '<div class="col-10 offset-1 mt-1 mb-1"><span>Welcome, <b>'.$user['name']."! | <a href='../../logout.php'>Logout</a></b></span></div>";
     ?>
-    <div class="card text-center" style="padding:15px;">
+    <div class="card text-center col-10 offset-1" style="padding:15px;">
   <h4>CONTROL PANEL</h4>
   
   <?php echo '<span><a href="../Articles/index.php">Lista articulow</a> | ';?>

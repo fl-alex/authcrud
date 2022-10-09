@@ -1,24 +1,20 @@
 <?php
 
-   if (!isset($_GET['editId']) && !empty($_GET['editId'])) {
-    $editId = $_GET['editId'];
-    $article = $ob_article->displyaRecordById($editId);
-  }
+   
     include_once '../../header.php';
-    include_once '../../Controllers/Articles.php';
-    include_once '../../Controllers/Category.php';
+    include_once '../../Controllers/Auth.php';
+    
 
-    $ob_article = new Articles();
-    $ob_category = new Category();
-    $arr = $ob_category->get_data_for_select();
- 
+    $ob_auth = new Auth();
+    
+    
   if(isset($_GET['editId']) && !empty($_GET['editId'])) {
     $editId = $_GET['editId'];
-    $article = $ob_article->displyaRecordById($editId);
+    $user = $ob_auth->displayRecordById($editId);
   }
 
   elseif(isset($_POST['update'])) {
-    $ob_article->updateRecord($_POST);
+    $ob_auth->updateRecord($_POST);
   }
   
   else {
@@ -45,47 +41,44 @@
         <div class="col-md-5 mx-auto">
             <div class="card">
                 <div class="card-header bg-primary">
-                    <h4 class="text-white">Editing Article: <?php echo $article['titul'];?></h4>
+                    <h4 class="text-white">Editing User: <?php echo $user['name'];?></h4>
                 </div>
                 <div class="card-body bg-light">
                   <form action="edit.php" method="POST">
                     <div class="form-group">
-                      <label for="name">Titul:</label>
-                      <input type="text" class="form-control" name="titul" 
-                             value="<?php echo $article['titul']; ?>" required="">
+                      <label for="name">Username:</label>
+                      <input type="text" class="form-control" name="name" 
+                             value="<?php echo $user['name']; ?>" required="">
                     </div>
                     <div class="form-group">
-                      <label for="email">Opis</label>
-                      <input type="text" class="form-control" name="opis" 
-                             value="<?php echo $article['opis']; ?>" required="">
+                      <label for="email">Email</label>
+                      <input type="text" class="form-control" name="email" 
+                             value="<?php echo $user['email']; ?>" required="">
                     </div>
+                    
+                      <div class="form-group">
+                      <label for="salary">Password:</label>
+                      <input type="text" class="form-control" name="password" 
+                             value="<?php echo $user['password']; ?>" required="">
+                    </div>
+
                     <div class="form-group">
                       <label for="salary">Status:</label>
-                      <input type="text" class="form-control" name="status" 
-                             value="<?php echo $article['status']; ?>" required="">
+                      <?php 
+                        if ($user['is_active'] = 1) {
+                          echo ('<input type="checkbox" class="form-control" name="is_active" 
+                          value="1" checked>');}
+                        else {
+                          echo ('<input type="checkbox" class="form-control" name="is_active" 
+                             value="0">');
+                        }  
+                      
+                      ?>
+                      
                     </div>
-                      <div class="form-group">
-                      <label for="category">Category:</label>
-                      <select class="form-control" name="category"  required="">
-                          <?php 
-                          foreach ($arr as $key => $value) {
-                            if ($value['id']==$article['category']){
-                                echo "<option value=".$value['id']." selected>".$value['name']."</option>";
-                            }  
-                            else {
-                                echo "<option value=".$value['id'].">".$value['name']."</option>";
-                            }                         
-                          }   
-                          ?>
-                      </select>        
-                      </div>
-                      <div class="form-group">
-                      <label for="salary">Body:</label>
-                      <input type="text" class="form-control" name="body" 
-                             value="<?php echo $article['body']; ?>" required="">
-                    </div>
+
                     <div class="form-group">
-                      <input type="hidden" name="id" value="<?php echo $article['id']; ?>">
+                      <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                       <input type="submit" name="update" class="btn btn-primary" 
                              style="float:right;" value="Update">
                     </div>

@@ -67,9 +67,9 @@ class Auth
         // ==========================================================
         // ============== Get data from table by id =================
         // ==========================================================
-        public function displyaRecordById($id)
+        public function displayRecordById($id)
         {
-            $query = "SELECT * FROM articles WHERE id = '$id'";
+            $query = "SELECT * FROM users WHERE id = '$id'";
             $result = $this->db_connection->query($query);
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
@@ -105,17 +105,17 @@ class Auth
         
         public function updateRecord($postData)
         {
-            $titul = $this->db_connection->real_escape_string($_POST['titul']);
-            $opis = $this->db_connection->real_escape_string($_POST['opis']);
-            $status = $this->db_connection->real_escape_string($_POST['status']);
-            $category = $this->db_connection->real_escape_string($_POST['category']);
-            $body = $this->db_connection->real_escape_string($_POST['body']);
+            $name = $this->db_connection->real_escape_string($_POST['name']);
+            $email = $this->db_connection->real_escape_string($_POST['email']);
+            $password = $this->db_connection->real_escape_string($_POST['password']);
+            $is_active = $this->db_connection->real_escape_string($_POST['is_active']);
             $id = $this->db_connection->real_escape_string($_POST['id']);
         if (!empty($id) && !empty($postData)) {
-            $query = "UPDATE articles "
-                    . "SET titul = '$titul', opis = '$opis', status = '$status', "
-                    . "category ='$category', body = '$body' "
+            $query = "UPDATE users "
+                    . "SET `name` = '$name', email = '$email', is_active = '$is_active', password = '$password' "                    
                     . "WHERE id = '$id'";
+           // print_r($query);
+           // exit();
             $sql = $this->db_connection->query($query);
             if ($sql==true) {
                 header("Location:index.php?msg=update");
